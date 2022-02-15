@@ -145,7 +145,52 @@
             "https://www.facebook.com/tanu.kansal",
             "https://www.linkedin.com/in/nitish-kansal-57111647/",
         ],
-        hireDate: '17/19/2013',
+        hireDate: '17/09/2013',
         status: true,
      }
 ];
+
+// Función para convertir fecha
+const convDate = (strDate) => {
+    let formateDate = strDate.substring(6, 10)+ // De la posición 6 a la 10 
+    '-'+ // Caracter de separación para la fecha 
+    strDate.substring(3, 5)+ // De la posición 3 a la 5 
+    '-'+
+    strDate.substring(0, 2); // De la posición 0 a la 2 
+    return new Date (formateDate); // la convierte al tipo de dato Date 
+};
+
+const actives = employees.filter((employee) => {return employee.status}); // filtro para empleados con estatus activo 
+
+const orderEmployees = actives.sort((a, b) => { // Función para comparar las fechas de los empleados por fecha de ingreso
+    let dateA = convDate (a.hireDate);  
+    let dateB = convDate (b.hireDate);
+    return dateA.getTime() - dateB.getTime(); // resta la fecha A con la B para hacer la comparación
+});
+
+const formateEmployees = orderEmployees.map((employee) => { // función que cambia el formato de presentación de los empleados
+     return { // retorna el nuevo formato
+        name: employee.name,
+        job: {
+            position: employee.jobPosition,
+            description: employee.jobDescription,
+        },
+        avatar: employee.avatar,
+        link: employee.links.shift(), // Solo el primer link de cada persona
+        hireDate: employee.hireDate,
+        email: employee.name.toLocaleLowerCase().replace(' ','.') + '@gft.com', // Convierte el nombre del empleado en su correo y reemplaza los espacios por puntos
+    };
+});
+
+console.log(formateEmployees); // imprime en consola el arreglo de los empleados con el nuevo formato. 
+
+
+// APUNTES // 
+/* console.log(orderEmployees);
+
+const fechitas = employees.map((employee) =>{return employee.hireDate});
+console.log(fechitas);
+
+
+const fechitasOrdenadas = orderEmployees.map((employee) =>{return employee.hireDate});
+console.log(fechitasOrdenadas); */
