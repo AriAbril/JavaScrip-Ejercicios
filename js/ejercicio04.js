@@ -23,6 +23,7 @@ const numOrdenados = datos.sort((num1, num2) => {
 });
 console.log(numOrdenados);
 
+let mediana = 0;
 if (numOrdenados.length%2==0){
     console.log('par');
     const ind1 = numOrdenados.length / 2 -1;
@@ -30,19 +31,29 @@ if (numOrdenados.length%2==0){
     console.log(ind1, ind2);
     const medianas = [numOrdenados[ind1],numOrdenados[ind2]];
     const mediaMediana = medianas.reduce((previous, current) => current+= previous);
-    const mediana = mediaMediana/medianas.length;
+    mediana = mediaMediana/medianas.length;
     console.log(mediana);
 } else {
     console.log('impar');
     const ind = numOrdenados.length / 2;
-    console.log(numOrdenados[Math.trunc(ind)]); // el math.trunc elimina los decimales
+    mediana = numOrdenados[Math.trunc(ind)];// el math.trunc elimina los decimales
 };
+    console.log(mediana); 
 
 //moda
-const conteo = numOrdenados.filter(num => {
-    return num==numOrdenados[5];
-}).length;
-console.log(conteo);
+    const moda = datos.sort((a,b) => // orden de elementos de acuerdo a su frecuencia en orden ascendente para que el que aparezca más veces esté al final
+            datos.filter(v => v===a).length // conteo de frecuencia del elemento a 
+            - datos.filter(v => v===b).length // conteo de frecuencia del elemento b
+        ).pop(); // Pone el elemento que más se repite al final del arreglo 
+    console.log(moda); 
 
 // formato 
+const formato = {
+    media, // Variables de JS
+    mediana,
+    moda,
+}; 
+console.log(formato);
 
+
+// NOTA: Cuando las variables del javaScript se llaman igual que las del formato, sólo se invocan las de javaScript.
