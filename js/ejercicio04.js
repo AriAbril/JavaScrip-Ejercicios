@@ -13,8 +13,8 @@
 const datos = [ 12, 45, 17, 7, 22, 71, 50, 37, 10, 48, 17, 51, 17, 30, 12, 81];
 
 // media
-const acum = datos.reduce((previous, current) => current += previous);
-const media = acum / datos.length;
+const acum = datos.reduce((previous, current) => current += previous); // sumar todos los elementos y acumularlos en el acum 
+const media = acum / datos.length; 
 console.log(`La media es: ${media}`);
 
 // mediana
